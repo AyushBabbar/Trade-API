@@ -24,10 +24,6 @@ const tradeSchema = new mongoose.Schema(
     timestamp: {
       type: Date
     }
-  },
-  {
-    // Disable the _id field for this collection
-    _id: false,
   }
 );
 

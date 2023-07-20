@@ -1,20 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const trade = require("./route/trade");
 const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/ayushbabbar", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log('DB connection successful!'))
-  .catch((err) => {
-    console.log('DB connection NOT successful!');
-    console.log(err);
-  });
-
-app.get('/', (req, res) => {
-  res.send("Index");
-  console.log(req.params);
-});
-
+app.use('/', trade);
 
 module.exports = app;
