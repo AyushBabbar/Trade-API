@@ -1,7 +1,8 @@
 const app = require("./app")
 const mongoose = require("mongoose");
+require('dotenv').config()
 
-mongoose.connect("mongodb://127.0.0.1:27017/ayushbabbar", {
+mongoose.connect(process.env.DB_PORT, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('DB connection successful!'))
@@ -10,6 +11,6 @@ mongoose.connect("mongodb://127.0.0.1:27017/ayushbabbar", {
     console.log(err);
   });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server is listening on port 3000")
 })

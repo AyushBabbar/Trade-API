@@ -12,13 +12,14 @@ exports.singleTrade = async (req, res) => {
         .json({ success: false, message: "No Trade found with given id" });
     }
     else {
-      res.status(200).json(trade);
+      return res
+        .status(200)
+        .json({ success: true, trade: trade });
     }
   }
   catch (err) {
-    console.error('Error finding trade:', err);
     return res
       .status(500)
-      .json({ error: 'An internal error occurred while finding the trade.' });
+      .json({ success: false, error: 'An error occurred while finding the trade.' });
   }
 };

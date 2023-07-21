@@ -14,12 +14,20 @@ exports.allTrades = async (req, res) => {
       filter.user_id = user_id;
     }
     const trades = await Trade.find(filter);
-    res.status(200).json(trades);
+    if (trades.length === 0) {
+      return res
+        .status(200)
+        .json({ message: "No trades match the given query" });
+
+    }
+    return res
+      .status(200)
+      .json({ success: true, trades: trades });
   }
   catch (err) {
     console.error('Error finding trade:', err);
     return res
       .status(500)
-      .json({ error: 'An internal error occurred while finding the trade.' });
+      .json({ success: false, error: 'An error occurred while finding the trade.' });
   }
 };

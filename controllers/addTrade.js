@@ -54,16 +54,18 @@ const addCurrTrade = async (req, res) => {
       newTrade.timestamp = timestamp;
     }
     await newTrade.save();
-    res.status(201).json(newTrade);
+    return res
+      .status(201)
+      .json({ success: true, trade: newTrade });
 
   } catch (err) {
     console.error('Error adding trade:', err);
     return res
       .status(500)
-      .json({ error: 'An internal error occurred while adding the trade.' });
+      .json({ success: false, error: 'An error occurred while adding the trade.' });
   }
 };
 
 module.exports = {
-  addCurrTrade: addCurrTrade,
+  addCurrTrade: addCurrTrade
 }
